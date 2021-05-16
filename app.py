@@ -63,7 +63,7 @@ class SetFrameRange(Application):
 
         if not entity.get('type'):
             task = self.shotgun.find_one('Task', [['id', 'is', entity.get('task')]], ['sg_deliverable_link'])
-            if not task:
+            if not task or not task.get('sg_deliverable_link'):
                 return
             if task.get('sg_deliverable_link').get('type'):
                 entity['type'] = task.get('sg_deliverable_link').get('type')
